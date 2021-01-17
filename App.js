@@ -1,21 +1,56 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+
+import accountScreen from './src/screens/accountScreen';
+import signinScreen from './src/screens/signinScreen';
+import signupScreen from './src/screens/signupScreen';
+
+
+import plantCreateScreen from './src/screens/plantCreateScreen';
+import plantDetailScreen from './src/screens/plantDetailScreen';
+import plantListScreen from './src/screens/plantListScreen';
+
+import { Provider as AuthProvider } from "./src/Context/authContext";
+
+import { setNavigator } from './src/navigationRef';
+
+import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
+
+import { FontAwesome } from '@expo/vector-icons';
+
+
+const plantlistflow = createStackNavigator({
+  plantList: plantListScreen,
+  plantDetail: plantDetailScreen
+});
+
+plantlistflow.navigationOptions = {
+  title: 'Plants',
+  tabBarIcon: <FontAwesome name="th-list" size={20} />
+};
+
+const switchNavigator = createSwitchNavigator({
+  ResolveAuthScreen: ResolveAuthScreen,
+  loginFlow: createStackNavigator({
+    Signup : signupScreen,
+    Signin : signinScreen
+  }),
+  mainFlow: createBottomTabNavigator({
+    plantListFlow: plantlistflow,
+    plantCreate: plantCreateScreen,
+    Account: accountScreen
+  })
+});
+
+const App = createAppContainer(switchNavigator);
+
+export default () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+        <AuthProvider>
+          <App ref = { (navigator) => {setNavigator(navigator)} }/>
+        </AuthProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
