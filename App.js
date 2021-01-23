@@ -4,14 +4,16 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
+import SplashScreen from './src/screens/SplashScreen';
 import accountScreen from './src/screens/accountScreen';
 import signinScreen from './src/screens/signinScreen';
 import signupScreen from './src/screens/signupScreen';
 
-
 import plantCreateScreen from './src/screens/plantCreateScreen';
 import plantDetailScreen from './src/screens/plantDetailScreen';
 import plantListScreen from './src/screens/plantListScreen';
+
+import CameraView from './src/screens/CameraView';
 
 import { Provider as AuthProvider } from "./src/Context/authContext";
 
@@ -35,6 +37,7 @@ plantlistflow.navigationOptions = {
 const switchNavigator = createSwitchNavigator({
   ResolveAuthScreen: ResolveAuthScreen,
   loginFlow: createStackNavigator({
+    Splash : SplashScreen, //auto load this screen first
     Signup : signupScreen,
     Signin : signinScreen
   }),
