@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ImageBackground} from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import AuthForm from '../Components/AuthForm';
 import NavLink from '../Components/NavLink';
@@ -18,7 +18,7 @@ const signinScreen = () =>{
                 submitButtonText="Sign in"
             />
             <NavLink 
-                text="Don't have an account? Sign up instead"
+                text="Don't have an account? Sign up instead."
                 routeName="Signup"
             />
         </View>

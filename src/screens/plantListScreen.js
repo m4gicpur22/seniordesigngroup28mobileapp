@@ -14,4 +14,10 @@ const styles = StyleSheet.create({
 
 });
 
+plantListScreen.navigationOptions = () => {
+    return {
+      headerShown: true,
+    };
+};
+
 export default plantListScreen;

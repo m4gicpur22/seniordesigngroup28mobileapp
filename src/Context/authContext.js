@@ -53,9 +53,7 @@ const tryLocalSignin = (dispatch) => async () => {
 
     if(token){
         dispatch({ type: 'sign_in', payload: token});
-
         navigate('plantList');
-
     }
     else {
         navigate('Signup');

@@ -35,18 +35,23 @@ plantlistflow.navigationOptions = {
 };
 
 const switchNavigator = createSwitchNavigator({
+  Splash : SplashScreen, //auto load this screen first
   ResolveAuthScreen: ResolveAuthScreen,
   loginFlow: createStackNavigator({
-    Splash : SplashScreen, //auto load this screen first
     Signup : signupScreen,
     Signin : signinScreen
   }),
   mainFlow: createBottomTabNavigator({
     plantListFlow: plantlistflow,
     plantCreate: plantCreateScreen,
+    camera: CameraView,
     Account: accountScreen
   })
-});
+},
+  {
+    initialRouteName: 'Splash'
+  }
+);
 
 const App = createAppContainer(switchNavigator);
 
