@@ -16,6 +16,7 @@ import plantListScreen from './src/screens/plantListScreen';
 import CameraView from './src/screens/CameraView';
 
 import { Provider as AuthProvider } from "./src/Context/authContext";
+import { Provider as PlantProvider } from "./src/Context/plantContext";
 
 import { setNavigator } from './src/navigationRef';
 
@@ -58,7 +59,9 @@ const App = createAppContainer(switchNavigator);
 export default () => {
   return (
         <AuthProvider>
+          <PlantProvider>
           <App ref = { (navigator) => {setNavigator(navigator)} }/>
+          </PlantProvider>
         </AuthProvider>
   );
 }

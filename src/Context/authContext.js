@@ -21,36 +21,35 @@ const authReducer = (state, action) => {
 };
 
 const signup = (dispatch) => async ({ email, password }) => {
-        try {
-            const res = await trackerApi.post('/signup', { email, password });
-            await AsyncStorage.setItem('token', res.data.token);
-            dispatch({ type: 'sign_in', payload: res.data.token});
+    try {
+        const res = await trackerApi.post('/signup', { email, password });
+        await AsyncStorage.setItem('token', res.data.token);
+        dispatch({ type: 'sign_in', payload: res.data.token});
 
-            navigate('plantList');
+        navigate('plantList');
 
-            console.log(response.data);
-        } catch (err) {
-            dispatch({ type: 'add_error', payload: 'Error with signup'})
-        }
+        console.log(response.data);
+    } catch (err) {
+        dispatch({ type: 'add_error', payload: 'Error with signup'})
+    }
 };
 
 const signin = (dispatch) => async ({email, password}) => {
-        try {
-            const res = await trackerApi.post('/signin', { email, password });
-            await AsyncStorage.setItem('token', res.data.token);
-            dispatch({type: 'sign_in', payload: res.data.token});
+    try {
+        const res = await trackerApi.post('/signin', { email, password });
+        await AsyncStorage.setItem('token', res.data.token);
+        dispatch({type: 'sign_in', payload: res.data.token});
 
-            navigate('plantList');
+        navigate('plantList');
 
-        }
-        catch(err){
-            dispatch({ type: 'add_error', payload: 'Error with signin'})
-        }
+    }
+    catch(err){
+        dispatch({ type: 'add_error', payload: 'Error with signin'})
+    }
 };
 
 const tryLocalSignin = (dispatch) => async () => {
     const token = await AsyncStorage.getItem('token');
-
     if(token){
         dispatch({ type: 'sign_in', payload: token});
         navigate('plantList');
