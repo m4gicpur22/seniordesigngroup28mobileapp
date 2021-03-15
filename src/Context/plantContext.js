@@ -5,8 +5,8 @@ const plantreducer = (state, action) =>{
     switch(action.type){
         case 'getSensordata':
             return action.payload
-        // case 'SensorError':
-        //     return {errorMessage: action.payload}
+        case 'SensorError':
+            return {errorMessage: action.payload}
         default:
             return state;
     }
@@ -20,12 +20,12 @@ const sensorinfo = (dispatch) => async () => {
     }
     catch(err){
         console.log("Error getting back sensor data with err: " + err);
-        //dispatch({type: 'SensorError', payload: 'Error getting back sensor data'})
+        dispatch({type: 'SensorError', payload: 'Error getting back sensor data'})
     }
 };
 
 export const {Provider, Context} = createDataContext(
     plantreducer,
     {sensorinfo},
-    []
+    {errorMessage: ''}
 );

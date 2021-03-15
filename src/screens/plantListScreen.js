@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Button, FlatList } from 'react-native';
 import {Context} from '../Context/plantContext';
 import trackerApi from '../Api/tracker';
@@ -7,17 +7,27 @@ const plantListScreen = () => {
     const [sensorData, setSensorData] = useState({});
     //const { sensorinfo } = useContext(Context);
 
-    return (
-        <View style={styles.plantContainer}>
-            <Text style={styles.listStyle}> Sensor Data displayed below</Text>
-            <Button onPress={async() => {
+    useEffect( () => {
+        const IntervalID = setInterval( async() => {
+            try {
                 const res = await trackerApi.get('getSensorInfo');
                 setSensorData(res.data.sensor);
                 console.log(sensorData);
-            }}
-                title="getSensorInfo"
-            >
-            </Button>
+            }
+            catch(err){
+                console.log("Error getting back data from sensors");
+            }
+        }, 5000) //change every 5 seconds
+
+        return () => {
+            clearInterval(IntervalID);
+        }
+
+    }, [sensorData]);
+
+    return (
+        <View style={styles.plantContainer}>
+            <Text> Sensor Data displayed below</Text>
             <View style={styles.listStyle}>
                 <Text>Humidity: {sensorData.humidityLevel}</Text>
                 <Text>Lux: {sensorData.lightLevel}</Text>
@@ -31,7 +41,8 @@ const plantListScreen = () => {
 const styles = StyleSheet.create({
     plantContainer: {
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems:'center'
     },
     listStyle:{
         alignItems: 'center',
