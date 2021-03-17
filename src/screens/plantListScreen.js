@@ -29,10 +29,9 @@ const plantListScreen = () => {
         <View style={styles.plantContainer}>
             <Text>Live sensor Data</Text>
             <View style={styles.listStyle}>
+                <Text>Temperature: {sensorData.temperatureLevel}</Text>
                 <Text>Humidity: {sensorData.humidityLevel}</Text>
                 <Text>Lux: {sensorData.lightLevel}</Text>
-                <Text>Soilmoisture: {sensorData.soilmoistureLevel}</Text>
-                <Text>Temperature: {sensorData.temperatureLevel}</Text>
             </View>
         </View>
     );
