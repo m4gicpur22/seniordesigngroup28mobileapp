@@ -6,19 +6,23 @@ import { FontAwesome } from '@expo/vector-icons';
 const CameraView = () => {
 
     return (
-        <View>
+        <View style={styles.viewStyle}>
             <Text>This is the camera view branch!</Text>
         </View>
     );
 }
 
-const styles = StyleSheet.create({
-
-});
-
 CameraView.navigationOptions = {
     title: 'Camera',
     tabBarIcon: <FontAwesome name="camera" size={20} />
 }
+
+const styles = StyleSheet.create({
+    viewStyle:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
+    },
+});
 
 export default CameraView;
