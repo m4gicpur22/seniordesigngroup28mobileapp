@@ -4,14 +4,14 @@ import {Context} from '../Context/plantContext';
 import trackerApi from '../Api/tracker';
 
 const plantListScreen = () => {
-    const [sensorData, setSensorData] = useState({});
+    const [sensorData, setSensorData] = useState([]);
     //const { sensorinfo } = useContext(Context);
 
     useEffect( () => {
         const IntervalID = setInterval( async() => {
             try {
                 const res = await trackerApi.get('getSensorInfo');
-                setSensorData(res.data.sensor);
+                setSensorData(res.data.sensor[0]);
                 console.log(sensorData);
             }
             catch(err){
