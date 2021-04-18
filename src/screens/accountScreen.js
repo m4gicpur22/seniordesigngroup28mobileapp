@@ -12,7 +12,7 @@ const accountScreen = () => {
     const { signout } = useContext(authContext);
 
     return (
-        <SafeAreaView forceInset={{ top: 'always'}}>
+        <SafeAreaView forceInset={{ top: 'always'}} style={styles.viewStyle}>
             <Text style={{fontSize: 48, textAlign: 'center'}}>Account Screen</Text>
             <Spacer>
                 <Button title="Sign Out" onPress={signout} />
@@ -22,7 +22,13 @@ const accountScreen = () => {
 
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    viewStyle:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
+    }
+});
 
 accountScreen.navigationOptions = {
     title: 'Account',

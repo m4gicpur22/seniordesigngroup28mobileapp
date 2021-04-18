@@ -9,7 +9,7 @@ import accountScreen from './src/screens/accountScreen';
 import signinScreen from './src/screens/signinScreen';
 import signupScreen from './src/screens/signupScreen';
 
-import plantCreateScreen from './src/screens/plantCreateScreen';
+//import plantCreateScreen from './src/screens/plantCreateScreen';
 import plantDetailScreen from './src/screens/plantDetailScreen';
 import plantListScreen from './src/screens/plantListScreen';
 
@@ -43,7 +43,6 @@ const switchNavigator = createSwitchNavigator({
   }),
   mainFlow: createBottomTabNavigator({
     plantListFlow: plantlistflow,
-    plantCreate: plantCreateScreen,
     camera: CameraView,
     Account: accountScreen
   })

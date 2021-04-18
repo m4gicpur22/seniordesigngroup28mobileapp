@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Button, FlatList, Dimensions } from 'react-native';
 import trackerApi from '../Api/tracker';
 import { WebView } from 'react-native-webview';
+import Spacer from '../Components/Spacer';
 
 const listTab = [
     {
@@ -67,9 +68,6 @@ const plantListScreen = () => {
 
     const [status, setStatus] = useState('Temperature');
     const setStatusFilter = (status) => {
-
-        console.log(status);
-
         if(status === 'Temperature'){
             setChartType(TemperatureChart);
         }
@@ -84,17 +82,15 @@ const plantListScreen = () => {
 
     return (
         <View style={styles.plantContainer}>
-            <Text style={{fontSize: 35}}>Live sensor Data</Text>
              <View style={styles.listStyle}>
-                <Text style={styles.textStyle}>Temperature: {sensorData.Celsius + " C / " + sensorData.Fahrenheit + " F"}</Text>
-                <Text style={styles.textStyle}>Humidity: {sensorData.humidityLevel}</Text>
-                <Text style={styles.textStyle}>Light Level: {sensorData.lightLevel}</Text>
-                <Text style={styles.textStyle}>SS1: {sensorData.Soilmoisture_1}</Text>
-                <Text style={styles.textStyle}>SS2: {sensorData.Soilmoisture_2}</Text>
-                <Text style={styles.textStyle}>Last Updated CPU Temperature: {sensorData.CPUTemperature + " C"}</Text>
-                <Text style={styles.textStyle}>Last Updated: {sensorData.DateTimeString}</Text>
-                <Text>{sensorData.CoolingSystemState == 1 ? "Cooling System ON" : "Cooling System OFF"}</Text>
-                <Text>{sensorData.IrrigationMSP == 1 ?  "Irrigation System ON" : "Irrigation System OFF"}</Text>
+                <Text>Temperature: {sensorData.Celsius + " C | " + sensorData.Fahrenheit + " F"}</Text>
+                <Text>Humidity: {sensorData.humidityLevel + "%"}</Text>
+                <Text>Light Level: {sensorData.lightLevel + " lux"}</Text>
+                <Text>CPU Temperature: {sensorData.CPUTemperature + " C"}</Text>
+                <Text>Last Updated: {sensorData.DateTimeString}</Text>
+                <Spacer></Spacer>
+                <Text>{sensorData.CoolingSystemState === 1 ? "Cooling System ON" : "Cooling System OFF"}</Text>
+                <Text>{sensorData.IrrigationMSP === 1 ?  "Irrigation System ON" : "Irrigation System OFF"}</Text>
             </View>
             <View style={styles.listTab}>
                 {listTab.map( (e) => (
@@ -122,19 +118,20 @@ const styles = StyleSheet.create({
     plantContainer: {
         flex: 1,
         justifyContent: 'center',
-        alignItems:'center'
+        alignItems:'center',
+        backgroundColor: '#32a852',
+        color: '#ffffff'
     },
     listStyle:{
         alignItems: 'center',
-        justifyContent: 'center'
-    },
-    textStyle: {
+        justifyContent: 'center',
         fontSize: 13
     },
     listTab : {
         flexDirection: 'row',
         alignSelf: 'center',
-        marginBottom: 20
+        marginBottom: 20,
+        padding: 10
     },
     btnTab : {
         flexDirection: 'row',
